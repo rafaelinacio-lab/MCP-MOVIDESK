@@ -1,0 +1,14 @@
+services:
+  mcp:
+    build: .
+    image: movidesk-mcp:latest
+    container_name: movidesk-mcp
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:3333:3333"   # só local; Caddy faz o TLS na frente
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }

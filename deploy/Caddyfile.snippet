@@ -1,0 +1,12 @@
+mcp-movidesk.viasoftcloud.com.br {
+    encode gzip
+    # Opcional: restringir por IP (rede Viasoft + IPs de saída da Anthropic — confirme a faixa atual na doc da Anthropic)
+    # @blocked not remote_ip 10.0.0.0/8 160.79.104.0/21
+    # respond @blocked 403
+    reverse_proxy 127.0.0.1:3333 {
+        flush_interval -1
+        transport http {
+            read_timeout 120s
+        }
+    }
+}
